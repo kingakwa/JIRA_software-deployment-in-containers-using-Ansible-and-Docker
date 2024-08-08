@@ -24,3 +24,5 @@ To determine which Git Bash belongs to which node, rename the servers.
 - Get into the **“hostname”** file in the /etc/ directory then edit the hostname of each server
   ```sh
   nano /etc/hostname
+
+![image-20240717-194643](https://github.com/user-attachments/assets/d5aa3bfc-3691-4cae-a19d-f8d4814ea04a)
