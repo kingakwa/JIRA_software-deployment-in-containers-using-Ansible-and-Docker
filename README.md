@@ -12,7 +12,7 @@
 ## Created Instances
 ![image-20240717-193325](https://github.com/user-attachments/assets/09a90b0e-fb51-4946-8c68-e320b45e2242)
 
-2. Login to 3 three instances using Git Bash
+**2.** Login to 3 three instances using Git Bash
 
 ![image-20240717-193457](https://github.com/user-attachments/assets/e2ae4bec-945f-444d-8148-90f63829042e)
 
@@ -35,7 +35,7 @@ To determine which Git Bash belongs to which node, rename the servers.
 
 ![image-20240717-194927](https://github.com/user-attachments/assets/695fe011-e358-4735-aa18-783b1ffc1244)
 
-3. For all 3 servers create a common user called “ansible”, set a common password, and allow for “Password authentication”  using the following commands for all 3 servers.
+**3.** For all 3 servers create a common user called “ansible”, set a common password, and allow for “Password authentication”  using the following commands for all 3 servers.
   ```sh
   sudo su - # Login as Root User
   useradd ansible
@@ -52,7 +52,7 @@ To determine which Git Bash belongs to which node, rename the servers.
   sudo systemctl restart sshd
   ```
   
-4. Add ansible to the “sudoers” group in each server.
+**4.** Add ansible to the “sudoers” group in each server.
 - Navigate to the sudoers group file via the following command.
   ```sh
   nano /etc/sudoers
@@ -76,7 +76,7 @@ You will have something like the above picture
 
 ![image-20240717-201024](https://github.com/user-attachments/assets/aeb53d25-35d4-433a-8ab1-43581e9ed07d)
 
-5. Create a Keypair in the Control node and copy it in the Worker Node so that it won't require a password when the Control node “SSH” into worker nodes. This will facilitate the configuration of the worker nodes or running the playbook via the control node since it won’t be hindered or blocked by asking for a password which we might not be available at every moment to pass that in.
+**5.** Create a Keypair in the Control node and copy it in the Worker Node so that it won't require a password when the Control node “SSH” into worker nodes. This will facilitate the configuration of the worker nodes or running the playbook via the control node since it won’t be hindered or blocked by asking for a password which we might not be available at every moment to pass that in.
 
 - While in the control Node, ensure you are at the home directory of the ansible user or run the following lines to do so.
   ```sh
@@ -103,7 +103,7 @@ You will have something like the above picture
 
 ![image-20240717-201823](https://github.com/user-attachments/assets/d348adb7-e97e-4db7-ab4c-823812bd6029)
 
-6. Installing Ansible and Docker packages.
+**6.** Installing Ansible and Docker packages.
 
 - Install the ansible package in the Control Node.
   ```sh
@@ -120,7 +120,7 @@ You will have something like the above picture
   sudo docker run hello-world # verify if docker is install
   ```
 
-7. Update the Inventory file in Control Host so that Ansible knows identified the nodes it communicates with when the playbook is run
+**7.** Update the Inventory file in Control Host so that Ansible knows identified the nodes it communicates with when the playbook is run
 
 - In the home directory of the “ansible” user, run this code.
   ```sh
@@ -132,7 +132,7 @@ You will have something like the above picture
 
 ![image-20240717-202404](https://github.com/user-attachments/assets/c185fb20-ad2a-4389-b399-df8530ca5a56)
 
-8. Creating directories and files in the Control Node for the docker-compose file and ansible-playbook
+**8.** Creating directories and files in the Control Node for the docker-compose file and ansible-playbook
 
 - To create the Docker compose file, run the following lines.
   ```sh
@@ -153,7 +153,7 @@ You will have something like the above picture
 
 - Paste in this ansible-playbook code in the **deploy_jira.yml** file
 
-9. Run playbook
+**9.** Run playbook
 
 - Ensure you are in the “cd /ansible_playbooks/deploy_jira.yml”, then run the playbook.
   ```sh
@@ -164,7 +164,7 @@ You will have something like the above picture
 
   ![image-20240717-203501](https://github.com/user-attachments/assets/62fdb45f-1a61-4c02-a12c-eda636b18f62)
 
-10. Creating a Load balancer to route traffic to the Worker Nodes.
+**10.** Creating a Load balancer to route traffic to the Worker Nodes.
 
 - Create a Load balancer Target Group. The target group protocol should be HTTP and port 8080 since in the docker-compose file, we created containers that are open on port 8080 and are mapped on port 8080 of worker nodes. Hit Next.
 
@@ -189,7 +189,7 @@ Create the Load balancer.
 
 ![image-20240717-204707](https://github.com/user-attachments/assets/10931c1d-d044-4c73-9d82-660e8bfa82cd)
 
-11. Testing
+**11.** Testing
 
 - Edit the inbound rule of the worker nodes security group to accept HTTP and HTTPS traffic from the Load balancer security group.
 
