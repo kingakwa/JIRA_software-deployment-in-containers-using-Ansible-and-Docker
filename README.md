@@ -141,7 +141,7 @@ You will have something like the above picture
   sudo nano docker-compose.yml # create a file called docker-compose.yml and paste in docker compose code
   ```
 
-- Paste in this docker-code in the **docker-compose.yml** file
+- Paste in the docker-compose code in the **docker-compose.yml** file
   
 
 - To create an Ansible Playbook file, run the following lines.
@@ -151,7 +151,7 @@ You will have something like the above picture
   sudo nano deploy_jira.yml # create a file called deploy_jira.yml and paste in ansible playbook file
   ```
 
-  Paste in this ansible-playbook code
+- Paste in this ansible-playbook code in the **deploy_jira.yml** file
 
 9. Run playbook
 
