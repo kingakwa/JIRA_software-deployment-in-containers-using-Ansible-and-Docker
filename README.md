@@ -26,3 +26,19 @@ To determine which Git Bash belongs to which node, rename the servers.
   nano /etc/hostname
 
 ![image-20240717-194643](https://github.com/user-attachments/assets/d5aa3bfc-3691-4cae-a19d-f8d4814ea04a)
+
+- Save the changes and reboot the servers
+  ```sh
+  reboot
+
+- Log into the instances again and you will realize that you can identify which Git bash belongs to which server
+
+![image-20240717-194927](https://github.com/user-attachments/assets/695fe011-e358-4735-aa18-783b1ffc1244)
+
+3. For all 3 servers create a common user called “ansible”, set a common password, and allow for “Password authentication”  using the following commands for all 3 servers.
+  ```sh
+  sudo su - # Login as Root User
+  useradd ansible
+  passwd ansible # pass a password
+  sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config # change password authentication permission to "yes"
+
