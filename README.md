@@ -18,9 +18,9 @@
 
 To determine which Git Bash belongs to which node, rename the servers.
 - In each server, Switch as a root user
-```sh
-sudo su –
+  ```sh
+  sudo su –
 
 - Get into the **“hostname”** file in the /etc/ directory then edit the hostname of each server
-```sh
-nano /etc/hostname
+  ```sh
+  nano /etc/hostname
