@@ -55,6 +55,66 @@ To determine which Git Bash belongs to which node, rename the servers.
   ```sh
   nano /etc/sudoers
 
-- Add “ansible” user in each of the following points in the file.
+- Add **“ansible”** user in each of the following points in the file.
 
+![image-20240717-200615](https://github.com/user-attachments/assets/15f10820-ad74-41a2-b0da-b6c17d4f4241)
 
+- In the **“Ansible_Control”** Node switch to the created “ansible” user.
+  ```sh
+  sudo su ansible
+
+- Try reaching the worker nodes one after the other from the Control Node. A password will be required.
+  ```sh
+  ssh ansible@private_ip
+
+You will have something like the above picture
+
+![image-20240717-201024](https://github.com/user-attachments/assets/aeb53d25-35d4-433a-8ab1-43581e9ed07d)
+
+5. Create a Keypair in the Control node and copy it in the Worker Node so that it won't require a password when the Control node “SSH” into worker nodes. This will facilitate the configuration of the worker nodes or running the playbook via the control node since it won’t be hindered or blocked by asking for a password which we might not be available at every moment to pass that in.
+
+- While in the control Node, ensure you are at the home directory of the ansible user or run the following lines to do so.
+```sh
+sudo su ansible 
+cd ~
+
+- Generate key pair and give required permissions to the generated keypair file(.ssh) so it can be copied to the worker nodes. After the code generates a key-pair, you can hit **“Enter”** till the end.
+  ```sh
+  ssh-keygen -t rsa # generate keypair
+  sudo chmod 700 /home/ansible/.ssh # gives permission to .ssh file to copy it to worker_node
+
+![image-20240717-201549](https://github.com/user-attachments/assets/a8ff4009-a5b7-426e-870c-aa2b3a95183c)
+
+- Copy Keypair to each worker node.
+  ```sh
+  ssh-copy-id ansible@private_ip
+
+![image-20240717-201731](https://github.com/user-attachments/assets/e7d09fc4-fb1c-4369-ac17-c1249ffe9173)
+
+- Once done, try to “SSH” again to your worker nodes and you won’t be prompted to pass a password.
+
+![image-20240717-201823](https://github.com/user-attachments/assets/d348adb7-e97e-4db7-ab4c-823812bd6029)
+
+6. Installing Ansible and Docker packages.
+
+- Install the ansible package in the Control Node.
+  ```sh
+  sudo amazon-linux-extras install ansible2 -y # install ansible in control node
+  ansible --version # check if ansible is installed
+
+- SSH into each worker node through the Control and install the Docker engine.
+  ```sh
+  sudo amazon-linux-extras install docker -y # install docker
+  sudo service docker start # start docker
+  sudo systemctl enable docker # enable docker
+  sudo systemctl status docker # ensure docker runs
+  sudo docker run hello-world # verify if docker is install
+
+7. Update the Inventory file in Control Host so that Ansible knows identified the nodes it communicates with when the playbook is run
+
+- In the home directory of the “ansible” user, run this code.
+  ```sh
+  cd /etc/ansible/
+  sudo nano hosts
+
+- At example 2 section uncomment "[webservers]" then pass the private Ip addresses of the Worker nodes beneath.
