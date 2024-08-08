@@ -141,7 +141,7 @@ You will have something like the above picture
   sudo nano docker-compose.yml # create a file called docker-compose.yml and paste in docker compose code
   ```
 
-  Paste in this docker-code
+- Paste in this docker-code in the **docker-compose.yml** file
   
 
 - To create an Ansible Playbook file, run the following lines.
