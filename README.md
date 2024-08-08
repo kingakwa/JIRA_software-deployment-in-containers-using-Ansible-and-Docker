@@ -128,4 +128,73 @@ You will have something like the above picture
   sudo nano hosts
   ```
 
-- At example 2 section uncomment "[webservers]" then pass the private Ip addresses of the Worker nodes beneath.
+- At example 2 section uncomment **"[webservers]"** then pass the private Ip addresses of the Worker nodes beneath.
+
+![image-20240717-202404](https://github.com/user-attachments/assets/c185fb20-ad2a-4389-b399-df8530ca5a56)
+
+8. Creating directories and files in the Control Node for the docker-compose file and ansible-playbook
+
+- To create the Docker compose file, run the following lines.
+  ```sh
+  mkdir ~/jira-docker # make a directory called jira-docker in home directory
+  cd ~/jira-docker # navigate to the directory
+  sudo nano docker-compose.yml # create a file called docker-compose.yml and paste in docker compose code
+  ```
+
+  Paste in this docker-code
+  
+
+- To create an Ansible Playbook file, run the following lines.
+  ```sh
+  mkdir ~/ansible-playbooks # make a directory called sndible-playbook in home directory
+  cd ~/ansible-playbooks # navigate to the directory
+  sudo nano deploy_jira.yml # create a file called deploy_jira.yml and paste in ansible playbook file
+  ```
+
+  Paste in this ansible-playbook code
+
+9. Run playbook
+
+- Ensure you are in the “cd /ansible_playbooks/deploy_jira.yml”, then run the playbook.
+  ```sh
+  ansible-playbook deploy_jira.yml
+  ```
+
+  output:
+
+  ![image-20240717-203501](https://github.com/user-attachments/assets/62fdb45f-1a61-4c02-a12c-eda636b18f62)
+
+10. Creating a Load balancer to route traffic to the Worker Nodes.
+
+- Create a Load balancer Target Group. The target group protocol should be HTTP and port 8080 since in the docker-compose file, we created containers that are open on port 8080 and are mapped on port 8080 of worker nodes. Hit Next.
+
+![image-20240717-203740](https://github.com/user-attachments/assets/15cc65c2-cb2f-4ae8-8619-dcddd08fe440)
+
+- Select the worker nodes and “include as pending below” then create the target group.
+
+![image-20240717-203833](https://github.com/user-attachments/assets/ce2b756e-eb29-4029-b83a-def68932b505)
+
+Create the Load balancer.
+
+- Choose Application Load balancer
+
+![image-20240717-204301](https://github.com/user-attachments/assets/41cc2383-dd3c-4c5e-a2c3-5b775b10e0ea)
+
+- Name the Load balancer and at the level of the Network setting, choose the desired VPC and all subnets.
+- Create a Security group that allows HTTPS and HTTPS traffic from anywhere.
+
+![image-20240717-204549](https://github.com/user-attachments/assets/4630a21b-3183-4963-aa66-8b9e78a009d3)
+
+- At the level of Listeners and Routing, choose an HTTP protocol listening from port 80, and pass the created target group. Then create the load balancer.
+
+![image-20240717-204707](https://github.com/user-attachments/assets/10931c1d-d044-4c73-9d82-660e8bfa82cd)
+
+11. Testing
+
+- Edit the inbound rule of the worker nodes security group to accept HTTP and HTTPS traffic from the Load balancer security group.
+
+![image-20240718-083724](https://github.com/user-attachments/assets/136b14f0-f9eb-4e39-b0fc-734dfb363dec)
+
+
+
+  
