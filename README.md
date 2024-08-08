@@ -42,3 +42,19 @@ To determine which Git Bash belongs to which node, rename the servers.
   passwd ansible # pass a password
   sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config # change password authentication permission to "yes"
 
+- Navigate to the /etc/ssh/sshd_config path, and uncomment **"PermitRootLogin"** in the sshd_config file.
+  ```sh
+  nano /etc/ssh/sshd_config
+
+- Restart the sshd service.
+  ```sh
+  sudo systemctl restart sshd
+
+4. Add ansible to the “sudoers” group in each server.
+- Navigate to the sudoers group file via the following command.
+  ```sh
+  nano /etc/sudoers
+
+- Add “ansible” user in each of the following points in the file.
+
+
