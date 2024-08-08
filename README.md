@@ -17,6 +17,9 @@
 ![image-20240717-193457](https://github.com/user-attachments/assets/e2ae4bec-945f-444d-8148-90f63829042e)
 
 To determine which Git Bash belongs to which node, rename the servers.
-- In each server, Switch as a root user:
-   ```sh
-   sudo su –
+- In each server, Switch as a root user
+```sh
+sudo su –
+- Get into the **“hostname”** file in the /etc/ directory then edit the hostname of each server
+```sh
+nano /etc/hostname
