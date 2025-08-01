@@ -193,11 +193,11 @@ Create the Load balancer.
 
 - Edit the inbound rule of the worker nodes security group to accept HTTP and HTTPS traffic from the Load balancer security group.
 
-![image-20240718-083724](https://github.com/user-attachments/assets/136b14f0-f9eb-4e39-b0fc-734dfb363dec)
+
 
 - Copy the DNS of the load balancer and paste it on the Browser, you should see this.
 
-![image-20240717-205519](https://github.com/user-attachments/assets/362693bc-66aa-4eaf-bc6c-8989ff77bc35)
+
 
 
 
